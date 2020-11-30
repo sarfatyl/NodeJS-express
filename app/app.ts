@@ -11,44 +11,24 @@ import {LoginRouter} from "./routers/login.router";
 class App {
 
 	public app: express.Application = express();
-	public mongoUrl: string = '';
-	public prefixRoute = '/ms_name/v1';
+	public mongoUrl: string = 'mongodb://localhost:27017/local';
 
 	constructor() {
-		// mongoose.connect('mongodb://localhost:27017/test-db').then(()=>{
-		// 	console.log('we are now connected to the db');
-		//
-		// },(err)=> {
-		// 	console.log(`we failed to connect db ${err}` );
-		//
-		// }
-		// )
-		// this.app.use(RwsLogger.startLogApiCalls);
+		mongoose.connect(this.mongoUrl).then(() => {
+				console.log('we are now connected to the db');
+			}, (err) => {
+				console.log(`we failed to connect db ${err}`);
+			}
+		)
 		this.config();
-		// this.mongoSetup();
 		this.setRouters();
-		// this.app.use(this.prefixRoute, this.app._router);
-		// this.app.use(RwsErrorHandling.errorHandler);
-		// this.app.use(RwsLogger.errorLogging);
-		// this.app.use(RwsLogger.endLogApiCalls);
 	}
-
 	private config(): void {
-		this.app.use(compression());
+		//middleware creator
 		this.app.use(bodyParser.json());
 		this.app.use(bodyParser.urlencoded({extended: false}));
 		// serving static files
 		this.app.use(express.static('public'));
-		this.app.disable('x-powered-by');
-	}
-
-	private mongoSetup(): void {
-		mongoose.Promise = global.Promise;
-		if (process.env.MONGO_DB_CONNECTIONSTRING) {
-			console.log('process.env.MONGO_DB_CONNECTIONSTRING', process.env.MONGO_DB_CONNECTIONSTRING);
-			this.mongoUrl = process.env.MONGO_DB_CONNECTIONSTRING;
-			mongoose.connect(this.mongoUrl, {useNewUrlParser: true});
-		}
 	}
 
 	private setRouters(): void {
@@ -57,6 +37,8 @@ class App {
 		this.app.use(ApiRoutes.Users, new UsersRouter().getRouter());
 		this.app.use(ApiRoutes.Login, new LoginRouter().getRouter());
 	}
+
+
 
 }
 
