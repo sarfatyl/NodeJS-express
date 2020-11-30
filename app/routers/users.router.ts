@@ -4,6 +4,7 @@ import {UsersService} from "../services/users.service";
 import {UsersDal} from "../dals/users.dal";
 import passport from "passport";
 import * as jwt from 'jsonwebtoken';
+import {UsersMongooseDal} from "../dals/users-mongoose.dal";
 require('../authentication-Strategies/local.authentication');
 require('../authentication-Strategies/jwt.authentication');
 const authorizedRoles = require('../authorization/role.authorization');
@@ -13,7 +14,8 @@ const authorizedRoles = require('../authorization/role.authorization');
 export class UsersRouter {
 	router: Router = Router();
 	usersDal: UsersDal = UsersDal.getInstance();
-	usersService: UsersService = new UsersService(this.usersDal);
+	usersDalDb: UsersMongooseDal = UsersMongooseDal.getInstance();
+	usersService: UsersService = new UsersService(this.usersDal, this.usersDalDb);
 	usersController:UsersController = new UsersController(this.usersService);
 
 
@@ -30,6 +32,16 @@ export class UsersRouter {
 			.delete(authorizedRoles(['admin']),this.usersController.deleteUser)
 		//error handler
 		this.router.use(this.usersController.errorMiddleware);
+
+		// db routes
+		this.router.route('/db')
+			.get(this.usersController.getUsersDB)
+			.post(this.usersController.createUserDB)
+		this.router.route('/db/:id')
+			.all(this.usersController.userExistDB)
+			.get(this.usersController.getUserByIdDB)
+			.put(this.usersController.updateUserDB)
+			.delete(authorizedRoles(['admin']),this.usersController.deleteUserDB)
 
 	}
 

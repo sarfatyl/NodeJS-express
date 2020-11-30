@@ -64,8 +64,8 @@ export class UsersController {
 	deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			const id: number = +req.params.id;
-			const mess:string = await this.usersService.deleteUser(id);
-			res.status(ResponseStatusCodes.Delete).send(mess);
+			await this.usersService.deleteUser(id);
+			res.status(ResponseStatusCodes.Delete)
 			next();
 		} catch (e) {
 			next(e)
@@ -80,6 +80,82 @@ export class UsersController {
 		} else {
 			res.status(400).send('User not found')
 		}
+
+	}
+
+	getUsersDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const users: UserModel[] = await this.usersService.getUsersDB();
+			res.status(ResponseStatusCodes.Ok).json(users);
+			next();
+		} catch (err) {
+			next(err)
+		}
+	};
+
+	createUserDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			let newUser = req.body;
+			if (!newUser) {
+				throw new Error('Invalid User')
+			}
+			newUser = await this.usersService.createUserDb(newUser);
+			res.status(ResponseStatusCodes.Create).json(newUser);
+			next();
+		} catch (err) {
+			next(err)
+		}
+	};
+
+	userExistDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const user:UserModel = await this.usersService.getUserByIdDb(req.params.id);
+			if (user) {
+				next();
+			} else {
+				res.status(400).send('User not found')
+			}
+		}catch (e) {
+			res.status(400).send('User not found')
+		}
+
+
+	}
+
+	getUserByIdDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id = req.params.id;
+			const user: UserModel = await this.usersService.getUserByIdDb(id);
+			res.status(ResponseStatusCodes.Ok).json(user);
+			next();
+		} catch (e) {
+			next(e)
+		}
+
+	}
+
+	updateUserDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id = req.params.id;
+			let updateUser: UserModel = req.body;
+			updateUser = await this.usersService.updateUserDb(updateUser);
+			res.status(ResponseStatusCodes.Create).json(updateUser);
+			next();
+		} catch (e) {
+			next(e)
+		}
+
+	}
+
+	deleteUserDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		// try {
+		// 	const id: number = +req.params.id;
+		// 	const mess = await this.usersService.deleteUser(id);
+		// 	res.status(ResponseStatusCodes.Ok).send(mess)
+		// 	next();
+		// } catch (e) {
+		// 	next(e)
+		// }
 
 	}
 

@@ -1,17 +1,17 @@
 import {UserModel} from "../models/user.model";
 import {UsersDal} from "../dals/users.dal";
+import {UsersMongooseDal} from "../dals/users-mongoose.dal";
 
 export class UsersService {
 
-	constructor(private usersDal: UsersDal) {
-
+	constructor(private usersDal: UsersDal, private usersDalDb: UsersMongooseDal) {
 	}
 
-	async getUsers(): Promise<UserModel[]> {
+	getUsers(): Promise<UserModel[]> {
 		return this.usersDal.getUsers();
 	}
 
-	async createUser(newUser: UserModel) {
+	createUser(newUser: UserModel) {
 		return this.usersDal.createUser(newUser);
 	}
 
@@ -19,11 +19,29 @@ export class UsersService {
 		return this.usersDal.getUserById(id);
 	}
 
-	async updateUser(updateUser: UserModel):Promise<UserModel> {
+	updateUser(updateUser: UserModel): Promise<UserModel> {
 		return this.usersDal.updateUser(updateUser);
 	}
 
-	async deleteUser(id: number):Promise<string> {
+	deleteUser(id: number): Promise<string> {
 		return this.usersDal.deleteUser(id);
+	}
+
+	async getUsersDB():Promise<UserModel[]> {
+		return this.usersDalDb.getUsersDB();
+	}
+
+	async createUserDb(newUser: UserModel):Promise<UserModel> {
+		return this.usersDalDb.createUser(newUser);
+
+	}
+
+	async getUserByIdDb(id):Promise<UserModel> {
+		return this.usersDalDb.getUserByIdDb(id);
+
+	}
+
+	async updateUserDb(updateUser: UserModel):Promise<UserModel>  {
+		return this.usersDalDb.updateUserDb(updateUser);
 	}
 }

@@ -6,9 +6,7 @@ import * as mongoose from 'mongoose';
 export const UserSchema = new Schema({
 	firstName: String,
 	lastName: String,
-	permissionName: {
-		type: String,
-	},
+	role: String,
 })
 export let User;
 try {

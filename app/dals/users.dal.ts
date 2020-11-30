@@ -18,36 +18,30 @@ export class UsersDal {
 		return UsersDal.instance;
 	}
 
-	getUsers(): UserModel[] {
+	async getUsers(): Promise<UserModel[]> {
 		return this._users;
 	}
 
-	createUser(newUser: UserModel): Promise<UserModel> {
-		return new Promise((resolve) => {
-			const id = this._users.length;
-			newUser.id = id;
-			this._users.push(newUser);
-			resolve(newUser);
-		});
+	async createUser(newUser: UserModel): Promise<UserModel> {
+		const id = this._users.length;
+		newUser.id = id;
+		this._users.push(newUser);
+		return newUser;
 	}
 
-	getUserById(id: number): Promise<UserModel> {
-		return new Promise<UserModel>((resolve) => {
-			const user = this._users.find((user) => {
-				return user.id === id;
-			})
-			resolve(user);
-		});
+	async getUserById(id: number): Promise<UserModel> {
+		const user = this._users.find((user) => {
+			return user.id === id;
+		})
+		return user;
 	}
 
-	updateUser(updateUser: UserModel): Promise<UserModel> {
-		return new Promise<UserModel>((resolve) => {
-			const user = this._users.find((user) => {
-				return user.id === updateUser.id;
-			})
-			Object.assign(user, updateUser);
-			resolve(updateUser);
-		});
+	async updateUser(updateUser: UserModel): Promise<UserModel> {
+		const user = this._users.find((user) => {
+			return user.id === updateUser.id;
+		})
+		Object.assign(user, updateUser);
+		return updateUser;
 	}
 
 	async deleteUser(id: number): Promise<string> {
