@@ -6,6 +6,7 @@ import {ApiRoutes} from './enums/api-routes.enum';
 import {ExampleRouter} from './routers/example.router';
 import {PingRouter} from './routers/ping.router';
 import {UsersRouter} from "./routers/users.router";
+import {LoginRouter} from "./routers/login.router";
 
 class App {
 
@@ -54,6 +55,7 @@ class App {
 		this.app.use(ApiRoutes.Ping, new PingRouter().getRouter());
 		this.app.use(ApiRoutes.Example, new ExampleRouter().getRouter());
 		this.app.use(ApiRoutes.Users, new UsersRouter().getRouter());
+		this.app.use(ApiRoutes.Login, new LoginRouter().getRouter());
 	}
 
 }

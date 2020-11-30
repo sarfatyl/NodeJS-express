@@ -71,7 +71,7 @@ export class UsersController {
 		try {
 			const id: number = +req.params.id;
 			const mess = await this.usersService.deleteUser(id);
-			res.status(ResponseStatusCodes.Ok).send(mess);
+			res.status(ResponseStatusCodes.Delete).send(mess);
 			next();
 		} catch (e) {
 			next(e)

@@ -4,4 +4,5 @@ export enum ApiRoutes {
 	Example = '/example',
 	GetExample = '/:id',
 	Users = '/users',
+	Login = '/login',
 }
