@@ -44,4 +44,8 @@ export class UsersService {
 	async updateUserDb(updateUser: UserModel):Promise<UserModel>  {
 		return this.usersDalDb.updateUserDb(updateUser);
 	}
+
+	async deleteUserDb(id: string) {
+		return this.usersDalDb.deleteUserDb(id);
+	}
 }

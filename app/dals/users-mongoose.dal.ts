@@ -1,8 +1,5 @@
 import {UserModel} from "../models/user.model";
 import {User} from "../entities/user.schema";
-import {Schema} from "mongoose";
-import ObjectId = module
-
 
 
 export class UsersMongooseDal {
@@ -34,5 +31,9 @@ export class UsersMongooseDal {
 
 	updateUserDb(updateUser: UserModel) {
 		return User.updateOne({_id: updateUser._id},updateUser, {upsert: true});
+	}
+
+	deleteUserDb(id: string) {
+		return User.remove({_id:id});
 	}
 }

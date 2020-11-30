@@ -148,14 +148,14 @@ export class UsersController {
 	}
 
 	deleteUserDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-		// try {
-		// 	const id: number = +req.params.id;
-		// 	const mess = await this.usersService.deleteUser(id);
-		// 	res.status(ResponseStatusCodes.Ok).send(mess)
-		// 	next();
-		// } catch (e) {
-		// 	next(e)
-		// }
+		try {
+			const id: string = req.params.id;
+			const mess = await this.usersService.deleteUserDb(id);
+			res.status(ResponseStatusCodes.Ok).send(mess)
+			next();
+		} catch (e) {
+			next(e)
+		}
 
 	}
 
