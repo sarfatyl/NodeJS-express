@@ -7,15 +7,8 @@
     "build": "tsc",
     "start": "npm run dev",
     "dev": "ts-node-dev --respawn --transpile-only ./app/server.ts",
-    "test": "jest --maxWorkers=10 -c jest.config.js --verbose",
-    "unit": "jest -c jest.config.unit.js",
-    "integration": "jest -c jest.config.integration.js",
-    "e2e": "jest -c jest.config.e2e.js",
-    "coverage": "jest --maxWorkers=10 -c jest.config.js --verbose --coverage",
     "lint": "eslint app/**/**.ts"
   },
-  "author": "RADWIN",
-  "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^6.1.0",
     "@types/express": "^4.16.1",
