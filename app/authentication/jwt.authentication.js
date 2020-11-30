@@ -8,7 +8,6 @@ passport.use(new JwtStrategy({
     secretOrKey: 'secret string',
     jwtFromRequest: extractToken()
 }, function (payload, done) {
-    console.log('payload.userId', payload.userId);
     const user = users.find((user) => {
         return user.id === payload.userId;
     });

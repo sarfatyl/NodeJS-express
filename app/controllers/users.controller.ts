@@ -2,7 +2,6 @@ import {UsersService} from "../services/users.service";
 import {NextFunction, Request, Response} from 'express-serve-static-core';
 import {UserModel} from "../models/user.model";
 import {ResponseStatusCodes} from "../enums/response-status-codes.enum";
-import {RwsError} from "../utils/rws-error-handling";
 
 export class UsersController {
 

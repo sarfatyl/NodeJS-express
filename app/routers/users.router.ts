@@ -6,7 +6,7 @@ import passport from "passport";
 import * as jwt from 'jsonwebtoken';
 require('../authentication/local.authentication');
 require('../authentication/jwt.authentication');
-const authorizedRoles = require('../authentication/role.authorization');
+const authorizedRoles = require('../authorization/role.authorization');
 
 
 export class UsersRouter {

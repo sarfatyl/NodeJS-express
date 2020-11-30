@@ -43,13 +43,17 @@ export class UsersDal {
 		});
 	}
 
-	deleteUser(id: number) {
+	deleteUser(id: number):Promise<string> {
 		return new Promise<string>((resolve) => {
+			console.log('1',);
+
 			const isIndex = (element) => element.id === id;
 			const index = this._users.findIndex(isIndex);
 			if (index) {
 				this._users.splice(index, 1);
 				resolve('deleted');
+			}else {
+				resolve('User not found');
 			}
 		});
 	}
