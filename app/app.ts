@@ -1,7 +1,6 @@
 import express = require('express');
 import bodyParser = require('body-parser');
 import mongoose = require('mongoose');
-import compression = require('compression');
 import {ApiRoutes} from './enums/api-routes.enum';
 import {ExampleRouter} from './routers/example.router';
 import {PingRouter} from './routers/ping.router';
@@ -14,15 +13,11 @@ class App {
 	public mongoUrl: string = 'mongodb://localhost:27017/local';
 
 	constructor() {
-		mongoose.connect(this.mongoUrl).then(() => {
-				console.log('we are now connected to the db');
-			}, (err) => {
-				console.log(`we failed to connect db ${err}`);
-			}
-		)
 		this.config();
+		// this.connectToDb();
 		this.setRouters();
 	}
+
 	private config(): void {
 		//middleware creator
 		this.app.use(bodyParser.json());
@@ -39,7 +34,14 @@ class App {
 	}
 
 
-
+	private connectToDb() {
+		mongoose.connect(this.mongoUrl).then(() => {
+				console.log('we are now connected to the db');
+			}, (err) => {
+				console.log(`we failed to connect db ${err}`);
+			}
+		)
+	}
 }
 
 export default new App().app;

@@ -2,7 +2,9 @@ import {UserModel} from "../models/user.model";
 import {UsersDal} from "../dals/users.dal";
 
 export class UsersService {
+
 	constructor(private usersDal: UsersDal) {
+
 	}
 
 	async getUsers(): Promise<UserModel[]> {

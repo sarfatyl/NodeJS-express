@@ -2,8 +2,8 @@ import {Router} from 'express';
 import passport from "passport";
 import * as jwt from 'jsonwebtoken';
 
-require('../authentication/local.authentication');
-require('../authentication/jwt.authentication');
+require('../authentication-Strategies/local.authentication');
+require('../authentication-Strategies/jwt.authentication');
 
 export class LoginRouter {
 
@@ -12,6 +12,7 @@ export class LoginRouter {
 	constructor() {
 		this.router.use(passport.initialize());
 
+		// passport.authenticate('local', {session: false}) is middleware creator pattern and expand req with user
 		this.router.post('', passport.authenticate('local', {session: false}), async function (req, res, next) {
 			const token = await jwt.sign({
 				hello: 'world',

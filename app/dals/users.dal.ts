@@ -1,6 +1,11 @@
 import {UserModel} from "../models/user.model";
 
+//Singleton
 export class UsersDal {
+	private static instance:UsersDal;
+
+	private constructor() {
+	}
 
 	private _users: UserModel[] = [{
 		firstName: 'Linoy',
@@ -9,6 +14,13 @@ export class UsersDal {
 		role: 'admin'
 	}];
 
+	public static getInstance(): UsersDal {
+		if (!UsersDal.instance) {
+			UsersDal.instance = new UsersDal();
+		}
+
+		return UsersDal.instance;
+	}
 
 	getUsers(): UserModel[] {
 		return this._users;

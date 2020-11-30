@@ -4,14 +4,14 @@ import {UsersService} from "../services/users.service";
 import {UsersDal} from "../dals/users.dal";
 import passport from "passport";
 import * as jwt from 'jsonwebtoken';
-require('../authentication/local.authentication');
-require('../authentication/jwt.authentication');
+require('../authentication-Strategies/local.authentication');
+require('../authentication-Strategies/jwt.authentication');
 const authorizedRoles = require('../authorization/role.authorization');
 
 
 export class UsersRouter {
 	router: Router = Router();
-	usersDal: UsersDal = new UsersDal();
+	usersDal: UsersDal = UsersDal.getInstance();
 	usersService: UsersService = new UsersService(this.usersDal);
 	usersController:UsersController = new UsersController(this.usersService);
 
