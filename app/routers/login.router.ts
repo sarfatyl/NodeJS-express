@@ -1,6 +1,5 @@
 import {Router} from 'express';
 import passport from "passport";
-import passportLocal from "passport-local";
 import * as jwt from 'jsonwebtoken';
 
 require('../authentication/local.authentication');

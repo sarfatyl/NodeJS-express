@@ -16,7 +16,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Ok).send(users);
 			next();
 		} catch (err) {
-			next(err)
+			res.send(err)
 		}
 	};
 
@@ -30,7 +30,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Create).send(newUser);
 			next();
 		} catch (err) {
-			next(err)
+			res.send(err)
 		}
 	}
 
@@ -46,7 +46,7 @@ export class UsersController {
 				throw new Error('User not found');
 			}
 		} catch (e) {
-			next(e)
+			res.send(e)
 		}
 
 	}
@@ -62,7 +62,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Create).send(updateUser);
 			next();
 		} catch (e) {
-			next(e)
+			res.send(e)
 		}
 
 	}
@@ -74,7 +74,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Delete).send(mess);
 			next();
 		} catch (e) {
-			next(e)
+			res.send(e)
 		}
 
 	}
