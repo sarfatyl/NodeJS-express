@@ -15,7 +15,10 @@ export class UsersRouter {
 			.get(this.usersController.getUsers)
 			.post(this.usersController.createUser)
 		this.router.route('/:id(\\d+)')
+			.all(this.usersController.userExist)
 			.get(this.usersController.getUserById)
+			.put(this.usersController.updateUser)
+			.delete(this.usersController.deleteUser)
 	}
 
 

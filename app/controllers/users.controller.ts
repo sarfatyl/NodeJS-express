@@ -6,15 +6,16 @@ import {RwsError} from "../utils/rws-error-handling";
 
 export class UsersController {
 
+
 	constructor(private usersService: UsersService) {
 	}
 
 	getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-		try{
+		try {
 			const users: UserModel[] = await this.usersService.getUsers();
 			res.status(ResponseStatusCodes.Ok).send(users);
 			next();
-		}catch (err) {
+		} catch (err) {
 			next(err)
 		}
 	};
@@ -22,34 +23,70 @@ export class UsersController {
 	createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			let newUser = req.body;
-			if(!newUser) {
+			if (!newUser) {
 				throw new Error('Invalid User')
 			}
 			newUser = await this.usersService.createUser(newUser);
 			res.status(ResponseStatusCodes.Create).send(newUser);
 			next();
-			next();
-		}catch (err) {
+		} catch (err) {
 			next(err)
 		}
 	}
+
 	getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			const id:number = +req.params.id;
-			console.log('',id);
+			const id: number = +req.params.id;
+			console.log('', id);
 			const user: UserModel = await this.usersService.getUserById(id);
-			if(user) {
+			if (user) {
 				res.status(ResponseStatusCodes.Ok).send(user);
 				next();
-			}else
-				{
+			} else {
 				throw new Error('User not found');
 			}
-		}catch (e) {
+		} catch (e) {
 			next(e)
 		}
 
 	}
 
+	updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id: number = +req.params.id;
+			let updateUser: UserModel = req.body;
+			if (!updateUser || id !== updateUser.id) {
+				throw new Error('Invalid User')
+			}
+			updateUser = await this.usersService.updateUser(updateUser);
+			res.status(ResponseStatusCodes.Create).send(updateUser);
+			next();
+		} catch (e) {
+			next(e)
+		}
+
+	}
+
+	deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id: number = +req.params.id;
+			const mess = await this.usersService.deleteUser(id);
+			res.status(ResponseStatusCodes.Ok).send(mess);
+			next();
+		} catch (e) {
+			next(e)
+		}
+
+	}
+
+	userExist = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		const user = await this.usersService.getUserById(+req.params.id);
+		if (user) {
+			next();
+		} else {
+			res.status(400).send('User not found')
+		}
+
+	}
 
 }

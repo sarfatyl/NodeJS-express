@@ -16,4 +16,12 @@ export class UsersService {
 	getUserById(id: number): Promise<UserModel> {
 		return this.usersDal.getUserById(id);
 	}
+
+	async updateUser(updateUser: any):Promise<UserModel> {
+		return this.usersDal.updateUser(updateUser);
+	}
+
+	async deleteUser(id: number) {
+		return this.usersDal.deleteUser(id);
+	}
 }
