@@ -23,7 +23,7 @@ export class UsersService {
 		return this.usersDal.updateUser(updateUser);
 	}
 
-	async deleteUser(id: number) {
+	async deleteUser(id: number):Promise<string> {
 		return this.usersDal.deleteUser(id);
 	}
 }

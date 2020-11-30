@@ -13,7 +13,7 @@ export class LoginRouter {
 		this.router.use(passport.initialize());
 
 		// passport.authenticate('local', {session: false}) is middleware creator pattern and expand req with user
-		this.router.post('', passport.authenticate('local', {session: false}), async function (req, res, next) {
+		this.router.post('', passport.authenticate('local', {session: false}), async(req, res, next) => {
 			const token = await jwt.sign({
 				hello: 'world',
 				userId: req.user.id,

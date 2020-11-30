@@ -12,7 +12,7 @@ export class UsersController {
 	getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			const users: UserModel[] = await this.usersService.getUsers();
-			res.status(ResponseStatusCodes.Ok).send(users);
+			res.status(ResponseStatusCodes.Ok).json(users);
 			next();
 		} catch (err) {
 			res.send(err)
@@ -26,7 +26,7 @@ export class UsersController {
 				throw new Error('Invalid User')
 			}
 			newUser = await this.usersService.createUser(newUser);
-			res.status(ResponseStatusCodes.Create).send(newUser);
+			res.status(ResponseStatusCodes.Create).json(newUser);
 			next();
 		} catch (err) {
 			res.send(err)
@@ -36,14 +36,9 @@ export class UsersController {
 	getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			const id: number = +req.params.id;
-			console.log('', id);
 			const user: UserModel = await this.usersService.getUserById(id);
-			if (user) {
-				res.status(ResponseStatusCodes.Ok).send(user);
-				next();
-			} else {
-				throw new Error('User not found');
-			}
+			res.status(ResponseStatusCodes.Ok).json(user);
+			next();
 		} catch (e) {
 			res.send(e)
 		}
@@ -58,7 +53,7 @@ export class UsersController {
 				throw new Error('Invalid User')
 			}
 			updateUser = await this.usersService.updateUser(updateUser);
-			res.status(ResponseStatusCodes.Create).send(updateUser);
+			res.status(ResponseStatusCodes.Create).json(updateUser);
 			next();
 		} catch (e) {
 			res.send(e)
@@ -89,6 +84,8 @@ export class UsersController {
 	}
 
 	//default error handler
-
+	errorMiddleware = async (error, req: Request, res: Response, next: NextFunction): Promise<void> => {
+		next(error);
+	}
 
 }

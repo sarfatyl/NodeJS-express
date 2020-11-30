@@ -1,4 +1,4 @@
-import {Router} from "express";
+import {NextFunction, Router} from "express";
 import {UsersController} from "../controllers/users.controller";
 import {UsersService} from "../services/users.service";
 import {UsersDal} from "../dals/users.dal";
@@ -9,6 +9,7 @@ require('../authentication-Strategies/jwt.authentication');
 const authorizedRoles = require('../authorization/role.authorization');
 
 
+
 export class UsersRouter {
 	router: Router = Router();
 	usersDal: UsersDal = UsersDal.getInstance();
@@ -17,8 +18,10 @@ export class UsersRouter {
 
 
 	constructor() {
-		//all route that starts in api
+		//all route that start in api check the JWT
 		this.router.use('/',passport.authenticate('jwt',{session:false}));
+		//error handler
+		this.router.use(this.usersController.errorMiddleware);
 		this.router.route('')
 			.get(this.usersController.getUsers)
 			.post(this.usersController.createUser)
@@ -33,4 +36,5 @@ export class UsersRouter {
 	getRouter(): Router {
 		return this.router;
 	}
+
 }
