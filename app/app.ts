@@ -14,7 +14,7 @@ class App {
 
 	constructor() {
 		this.config();
-		// this.connectToDb();
+		this.connectToDb();
 		this.setRouters();
 	}
 

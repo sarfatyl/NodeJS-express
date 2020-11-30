@@ -15,7 +15,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Ok).json(users);
 			next();
 		} catch (err) {
-			res.send(err)
+			next(err)
 		}
 	};
 
@@ -29,7 +29,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Create).json(newUser);
 			next();
 		} catch (err) {
-			res.send(err)
+			next(err)
 		}
 	}
 
@@ -40,7 +40,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Ok).json(user);
 			next();
 		} catch (e) {
-			res.send(e)
+			next(e)
 		}
 
 	}
@@ -56,7 +56,7 @@ export class UsersController {
 			res.status(ResponseStatusCodes.Create).json(updateUser);
 			next();
 		} catch (e) {
-			res.send(e)
+			next(e)
 		}
 
 	}
@@ -64,11 +64,11 @@ export class UsersController {
 	deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			const id: number = +req.params.id;
-			const mess = await this.usersService.deleteUser(id);
+			const mess:string = await this.usersService.deleteUser(id);
 			res.status(ResponseStatusCodes.Delete).send(mess);
 			next();
 		} catch (e) {
-			res.send(e)
+			next(e)
 		}
 
 	}

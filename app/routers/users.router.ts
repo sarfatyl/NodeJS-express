@@ -20,8 +20,6 @@ export class UsersRouter {
 	constructor() {
 		//all route that start in api check the JWT
 		this.router.use('/',passport.authenticate('jwt',{session:false}));
-		//error handler
-		this.router.use(this.usersController.errorMiddleware);
 		this.router.route('')
 			.get(this.usersController.getUsers)
 			.post(this.usersController.createUser)
@@ -30,6 +28,9 @@ export class UsersRouter {
 			.get(this.usersController.getUserById)
 			.put(this.usersController.updateUser)
 			.delete(authorizedRoles(['admin']),this.usersController.deleteUser)
+		//error handler
+		this.router.use(this.usersController.errorMiddleware);
+
 	}
 
 

@@ -19,7 +19,7 @@ export class UsersService {
 		return this.usersDal.getUserById(id);
 	}
 
-	async updateUser(updateUser: any):Promise<UserModel> {
+	async updateUser(updateUser: UserModel):Promise<UserModel> {
 		return this.usersDal.updateUser(updateUser);
 	}
 

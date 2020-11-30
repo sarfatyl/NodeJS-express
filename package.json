@@ -7,8 +7,6 @@
     "build": "tsc",
     "start": "npm run dev",
     "dev": "ts-node-dev --respawn --transpile-only ./app/server.ts",
-    "prod": "npm run build && node ./build/server.js",
-    "debug": "tsnd --inspect --respawn app/server.ts",
     "test": "jest --maxWorkers=10 -c jest.config.js --verbose",
     "unit": "jest -c jest.config.unit.js",
     "integration": "jest -c jest.config.integration.js",

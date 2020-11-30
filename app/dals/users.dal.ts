@@ -50,12 +50,10 @@ export class UsersDal {
 		});
 	}
 
-	deleteUser(id: number): Promise<string> {
-		return new Promise<string>((resolve) => {
-			const isIndex = (element) => element.id === id;
-			const index = this._users.findIndex(isIndex);
-			this._users.splice(index, 1);
-			resolve('deleted');
-		});
+	async deleteUser(id: number): Promise<string> {
+		const sameId = (element) => element.id === id;
+		const index = await this._users.findIndex(sameId);
+		this._users.splice(index, 1);
+		return 'deleted';
 	}
 }
