@@ -19,6 +19,13 @@ export class LoginRouter {
 				userId: req.user.id,
 				role: req.user.role
 			}, 'secret string');
+			res.cookie('token',token , {
+				path:'/users',
+				httpOnly:true,
+				secure:true,
+				sameSite:true,
+				expires: new Date(Date.now() + 900000)
+			});
 			res.send(`jwt token: ${token}`);
 		})
 	}

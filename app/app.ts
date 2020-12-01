@@ -35,8 +35,8 @@ class App {
 
 
 	private connectToDb() {
-		mongoose.connect(this.mongoUrl).then(() => {
-				console.log('we are now connected to the db');
+		mongoose.connect(this.mongoUrl,{ useUnifiedTopology: true,useNewUrlParser: true }).then(() => {
+				console.log(`we are now connected to the MongoDb`);
 			}, (err) => {
 				console.log(`we failed to connect db ${err}`);
 			}
