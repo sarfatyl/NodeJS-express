@@ -2,6 +2,7 @@ import {UsersService} from "../services/users.service";
 import {NextFunction, Request, Response} from 'express-serve-static-core';
 import {UserModel} from "../models/user.model";
 import {ResponseStatusCodes} from "../enums/response-status-codes.enum";
+const bcrypt = require('bcrypt');
 
 export class UsersController {
 
@@ -25,6 +26,8 @@ export class UsersController {
 			if (!newUser) {
 				throw new Error('Invalid User')
 			}
+			const encryptedPassword = await bcrypt.hash(req.body.password, 10)
+			newUser.password = encryptedPassword;
 			newUser = await this.usersService.createUser(newUser);
 			res.status(ResponseStatusCodes.Create).json(newUser);
 			next();
@@ -95,10 +98,12 @@ export class UsersController {
 
 	createUserDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			let newUser = req.body;
+			let newUser: UserModel = req.body;
 			if (!newUser) {
 				throw new Error('Invalid User')
 			}
+			const encryptedPassword = await bcrypt.hash(req.body.password, 10)
+			newUser.password = encryptedPassword;
 			newUser = await this.usersService.createUserDb(newUser);
 			res.status(ResponseStatusCodes.Create).json(newUser);
 			next();
