@@ -10,21 +10,21 @@
  Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
  */
 var merge = function(intervals) {
-    intervals.sort((a,b) => {
-        return a[0]-b[0];
-    })
-    let merged = [];
-    for(let interval of intervals) {
-        let lastMarged = merged[merged.length-1]
-        if(merged.length === 0) {
-            merged.push(interval);
-        }else if (interval[0] > lastMarged[1]) {
-            merged.push(interval);
-        }
-        else {
-            lastMarged[1] = Math.max(lastMarged[1], interval[1])
-        }
+	intervals.sort((a,b) => {
+		return a[0]-b[0];
+	});
+	let merged = [];
+	for(let interval of intervals) {
+		let lastMarged = merged[merged.length-1];
+		if(merged.length === 0) {
+			merged.push(interval);
+		}else if (interval[0] > lastMarged[1]) {
+			merged.push(interval);
+		}
+		else {
+			lastMarged[1] = Math.max(lastMarged[1], interval[1]);
+		}
 
-    }
-    return merged;
+	}
+	return merged;
 };
