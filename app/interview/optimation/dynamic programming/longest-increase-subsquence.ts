@@ -9,7 +9,7 @@ function lengthOfLIS(arr) {
 			if(arr[i] > arr[j]) {
 				currentMax = Math.max(currentMax, dp[j]);
 			}
-			dp[i] = currentMax+1;
+			dp[i] = currentMax + 1;
 		}
 		maxAns = Math.max(maxAns, currentMax);
 	}

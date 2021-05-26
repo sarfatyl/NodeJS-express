@@ -3,7 +3,7 @@ function dfs(startV) {
 	let visited = new Set();
 	stack.push(startV);
 	visited.add(startV);
-	while(stack) {
+	while(stack.length) {
 		let currentV = stack.pop();
 		console.log('node with:', startV.value);
 		currentV.edges.forEach(edge => {

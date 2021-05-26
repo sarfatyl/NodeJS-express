@@ -12,7 +12,7 @@ function binarySearchIter(arr, num) {
 	let end = arr.length -1;
 
 	while(start < end) {
-		let mid = Math.floor((start + end)/2);
+		let mid =  Math.floor((end - start)/2);
 		if(arr[mid] === num) {
 			return mid;
 		}else if(num < arr[mid]) {

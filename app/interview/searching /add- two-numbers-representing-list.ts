@@ -13,7 +13,7 @@
  * init result pointer ans result iteration
  * init two pointer for lists input
  * check edge cases like null list
- *  loop thruogh the lists in parallel
+ *  loop through the lists in parallel
     compute the sum of the node with the carry
         if the sum >= 10
         sum = sum % 10

@@ -1,0 +1,38 @@
+tree- find all paths - pre order
+function allPathTree(root,ret,currPath, sum) {
+	if(root === null) {
+		return;
+	}
+	currPath.push(root.val)
+	if(root.left === null && root.right === null) {
+		ret.push([...currPath]);
+	}
+	sumNumbersRec(root.left, ret,currPath, sum);
+	sumNumbersRec(root.right, ret,currPath, sum);
+	currPath.pop();
+
+}
+
+graph -
+
+setup adj list
+visited     // created visited arr where 0= unvisited, -1 = visiting in current traversal, 1 = visited
+
+loop through all the nodes
+each one run dfs
+function dfs(adj, visited, i) {
+    // if we run into a node that saw in separate earlier dfs there no problem
+    if(visited[i] === 1) return true;
+    // if we run into a node that we saw earlier in this CURRENT dfs , uts a cycle
+    if(visited[i] === -1) return false;
+
+    let neighbors = adj.get(i);
+    //mark the current node as -1 - visiting
+    visited[i] = -1;
+    for(let nieg of neighbors) {
+        if(!dfs(adj, visited, j)
+        return false
+    }
+    visited[i] = 1;
+    return true;
+}

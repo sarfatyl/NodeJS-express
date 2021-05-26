@@ -9,11 +9,11 @@ const knapSack = (values, weights, n, target) => {
 		return 0;
 	}
 
-	// Case 1. include current item n in knapSack (values[n]) and recur for
+	// Case 1. include current item n in knapsackNaive (values[n]) and recur for
 	// remaining items (n - 1) with decreased capacity (weight - weights[n])
 	let include = values[n] + knapSack(values, weights, n - 1, target - weights[n]);
 
-	// Case 2. exclude current item n from knapSack and recur for
+	// Case 2. exclude current item n from knapsackNaive and recur for
 	// remaining items (n - 1)
 	let exclude = knapSack(values, weights, n - 1, target);
 

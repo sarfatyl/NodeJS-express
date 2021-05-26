@@ -1,0 +1,48 @@
+/**** duplicate numbers in the input******/
+
+ * Input: nums = [1,1,2]
+Output:[[1,1,2], [1,2,1],[2,1,1]]
+
+ if we have duplicate numbers in the input
+  * we need to sort to avoid dup purm answers
+  * and each iteration to do just on time iteration to dup nums
+  * init used array to keep track the indexes that we have already explored
+
+  		used[i] = 1;
+  		currPerm.push(arr[i]);
+  		dfsWithBackTracking(res, currPerm, arr, used);
+  		currPerm.pop();
+  		used[i] = 0;
+  		while( i + 1 < arr.length && arr[i] === arr[i+1]) i = i + 1;
+
+/**** without duplicate numbers in the input******/
+
+ * Input: nums = [1,2,3]
+   Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+ if we have no duplicate numbers in the input
+  * init used array to keep track the indexes that we have already explored
+
+		if (used[i]) continue;
+		used[i] = 1;
+		currPerm.push(arr[i]);
+		dfsWithBackTracking(res, currPerm, arr, used);
+		currPerm.pop();
+		used[i] = 0;
+
+
+/**** find all sunset - sub sequences without dup******/
+
+ * Input: nums = [1,2,3]
+ * Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+
+ ** we always add the curr perm without base cases!
+ ** buy the iteration loop start on the i + 1(index)  to avoid dup
+
+ 	res.push([...curr]);
+
+ 	for(let i = index; i < nums.length; i++ ) {
+ 		curr.push(nums[i]);
+ 		backtracking(nums,res, curr, i + 1);
+ 		curr.pop();
+ 	}

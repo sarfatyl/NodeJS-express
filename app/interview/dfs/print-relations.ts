@@ -59,7 +59,7 @@ function dfs(root, relationsMap) {
 		value: root,
 		level: 0,
 	});
-	while(stack.length !== 0) {
+	while(stack.length) {
 		let str = '';
 		let current = stack.pop();
 		for(let i = 0; i < current.level; i++) {

@@ -1,0 +1,47 @@
+/**
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+var canFinish = function(numCourses, prerequisites) {
+    // set up adjacency list
+    let adj = new Map();
+
+
+    for(let peq of prerequisites) {
+    //directed graph , so only one way
+        if(!adj.has(req[0])) {
+            adj.set(req[0], []);
+        }
+        adj.get(req[0]).push(req[1]);
+    }
+    // created visited arr where 0= unvisited, -1 = visiting in current traversal, 1 = visited
+    let visited = new Array(numCourses).fill(0);
+
+    // loop through all the nodes graph
+    for(let i = 0; i < numCourses; i++) {
+        // false if a cycle found
+        if(!dfs(adj, visited, i)) {
+        return false
+        }
+
+    }return true;
+
+};
+
+function dfs(adj, visited, i) {
+    // if we run into a node that saw in separate earlier dfs there no problem
+    if(visited[i] === 1) return true;
+    // if we run into a node that we saw earlier in this CURRENT dfs , uts a cycle
+    if(visited[i] === -1) return false;
+
+    let neighbors = adj.get(i);
+    //mark the current node as -1 - visiting
+    visited[i] = -1;
+    for(let nieg of neighbors) {
+        if(!dfs(adj, visited, j)
+        return false
+    }
+    visited[i] = 1;
+    return true;
+}

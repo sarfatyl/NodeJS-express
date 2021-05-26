@@ -4,6 +4,7 @@ function minCoinsToGetN(amount: number, coins) {
 	let dp = [];
 	// base case
 	dp[0] = 0;
+	dp[1] = 1;
 	for (let j = 1; j <= amount; ++j) {
 		for (let i = 0; i < coins.size(); ++i) {
 			if (coins[i] <= j) {
