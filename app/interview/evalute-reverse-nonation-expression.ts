@@ -48,7 +48,7 @@ function evaluateExpression(arr: string[]): number {
 			stack.push( v2 - v1 );
 			break;
 		case '/':
-			v1 = stack.pop();ee
+			v1 = stack.pop();
 			v2 = stack.pop();
 			stack.push( v2 / v1 );
 			break;
