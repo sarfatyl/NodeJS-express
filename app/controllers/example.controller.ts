@@ -21,7 +21,28 @@ export class ExampleController {
 	getExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
 			const id: number = +req.params.id;
-			let example: ExampleModel = this.exampleService.getExampleById(id);
+			let example = this.exampleService.getEvidenceInfoExample(id);
+			res.status(ResponseStatusCodes.Ok).send(example);
+			next();
+		} catch (error) {
+			next(error);
+		}
+	};
+	getClinvarInfoExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id: number = +req.params.id;
+			let example = this.exampleService.getClinvarInfoExample(id);
+			res.status(ResponseStatusCodes.Ok).send(example);
+			next();
+		} catch (error) {
+			next(error);
+		}
+	};
+
+	getEvidenceInfoExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+		try {
+			const id: number = +req.params.id;
+			let example = this.exampleService.getEvidenceInfoExample(id);
 			res.status(ResponseStatusCodes.Ok).send(example);
 			next();
 		} catch (error) {

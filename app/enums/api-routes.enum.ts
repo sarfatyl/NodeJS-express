@@ -5,4 +5,7 @@ export enum ApiRoutes {
 	GetExample = '/:id',
 	Users = '/users',
 	Login = '/login',
+	getClinvarInfoExample = "/getClinvarInfoExample",
+	getEvidenceInfoExample = "/getEvidenceInfoExample"
+
 }

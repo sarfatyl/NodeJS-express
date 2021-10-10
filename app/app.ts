@@ -6,6 +6,7 @@ import {ExampleRouter} from './routers/example.router';
 import {PingRouter} from './routers/ping.router';
 import {UsersRouter} from "./routers/users.router";
 import {LoginRouter} from "./routers/login.router";
+const cors = require('cors')
 
 class App {
 
@@ -14,7 +15,7 @@ class App {
 
 	constructor() {
 		this.config();
-		this.connectToDb();
+		//this.connectToDb();
 		this.setRouters();
 	}
 
@@ -24,6 +25,7 @@ class App {
 		this.app.use(bodyParser.urlencoded({extended: false}));
 		// serving static files
 		this.app.use(express.static('public'));
+		this.app.use(cors());
 	}
 
 	private setRouters(): void {

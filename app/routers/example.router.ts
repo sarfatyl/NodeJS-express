@@ -15,7 +15,10 @@ export class ExampleRouter {
 	);
 
 	constructor() {
-		this.router.get(ApiRoutes.GetExample, this.exampleController.getExample);
+		// this.router.get(ApiRoutes.GetExample, this.exampleController.getExample);
+		this.router.get(ApiRoutes.getClinvarInfoExample, this.exampleController.getClinvarInfoExample);
+		this.router.get(ApiRoutes.getEvidenceInfoExample, this.exampleController.getEvidenceInfoExample);
+
 	}
 
 	getRouter(): Router {
