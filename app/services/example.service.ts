@@ -4,14 +4,17 @@ import {ExampleDal} from '../dals/example.dal';
 export class ExampleService {
 	getClinvarInfoExample(arg0: number) {
 		return {
+			id:'',
+			info: {
 			tepology: 'NM_007294.4(BRCA1):c.3257del (p.Arg1085_Leu1086insTer)',
 			Interpretation:'Pathogenic',
 			Review_status:'3 stars',
 			Submissions:'3',
 			Last_evaluated:'Dec 15, 2017',
 			Accession:'VCV000252873.4',
-			Variation_ID:'252873',
+			Variation_ID:'25112873',
 			Description:'1bp deletion'
+			}
 		}
 	}
 
