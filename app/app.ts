@@ -7,6 +7,7 @@ import {PingRouter} from './routers/ping.router';
 import {UsersRouter} from "./routers/users.router";
 import {LoginRouter} from "./routers/login.router";
 const cors = require('cors')
+const fileUpload = require('express-fileupload');
 
 class App {
 
@@ -26,6 +27,7 @@ class App {
 		// serving static files
 		this.app.use(express.static('public'));
 		this.app.use(cors());
+		this.app.use(fileUpload());
 	}
 
 	private setRouters(): void {

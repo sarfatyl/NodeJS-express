@@ -3,6 +3,7 @@ import {ExampleController} from '../controllers/example.controller';
 import {ApiRoutes} from '../enums/api-routes.enum';
 import {ExampleDal} from '../dals/example.dal';
 import {ExampleService} from '../services/example.service';
+import { Console } from 'winston/lib/winston/transports';
 
 export class ExampleRouter {
 
@@ -18,6 +19,8 @@ export class ExampleRouter {
 		// this.router.get(ApiRoutes.GetExample, this.exampleController.getExample);
 		this.router.get(ApiRoutes.getClinvarInfoExample, this.exampleController.getClinvarInfoExample);
 		this.router.get(ApiRoutes.getEvidenceInfoExample, this.exampleController.getEvidenceInfoExample);
+		this.router.post(ApiRoutes.uploadFile, this.exampleController.uploadFile);
+
 
 	}
 
